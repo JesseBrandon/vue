@@ -1,0 +1,29 @@
+const Counter = {
+  data() {
+    return {
+      counter: 0
+    }
+  },
+  methods:{
+	increment(){
+     this.counter = this.counter + 1
+	}
+  },
+  template: `<p>Message from vue 2</p>
+  <button-counter></button-counter>
+  <br>
+  <button type="button" class="btn btn-primary" @click="increment()">Increment</button>
+  <p>@{{counter}}</p>`
+}
+
+ let app2 = Vue.createApp(Counter)
+ app2.component('button-counter', {
+  data: function () {
+    return {
+      count: 0
+    }
+  },
+  template: '<button v-on:click="count++">Component from Vue2 @{{ count }} times.</button>'
+})
+
+app2.mount('#main1')

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Customer Portal</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+ <style type="text/css">
+
+
+  </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.29/vue.global.min.js" integrity="sha512-BKH/vuoIj9yh4H5iLWbO+zg7Q+UzDIzzqLpShKFmMhlB148D0sus7B4nbtSrBwfytfpydaxFT+07Hpc7Kncl2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="main-bg"  >
+
+
+
+<div  id="main1" >
+<div class="container" v-if="mount1">
+<button-counter></button-counter>
+<br>
+<button type="button" class="btn btn-primary" @click="internal_fetch">Fetch from vue 2</button>
+</div>
+
+
+
+</div>
+
+<div id="main2"></div>
+<div id="main3"></div>
+
+   <script type="text/javascript">
+
+
+      let global_var = ''
+      const View1 = {
+      mounted(){
+
+      },
+      created(){
+
+      },
+      data() {
+      return {
+      message: 'message from vue 1 ' + '{{$data}}',
+      mount1: true,
+      }
+      },
+      methods: {
+      internal_fetch(){
+      eval(global_var)
+      console.log(global_var)
+      }
+      },
+      computed: {
+      },
+      }
+
+    
+
+    let app1 = Vue.createApp(View1)
+    app1.component('button-counter', {
+    data: function () {
+    return {
+    count: 0
+    }
+    },
+    template: '<button v-on:click="count++">Component from Vue1 @{{ count }} times.</button>'
+    })
+    app1.mount('#main1')
+
+
+
+
+
+function myFunction(){
+fetch('fetch.html')
+.then(response => response.text())
+.then((txt)=> {
+global_var = txt
+})
+}
+
+function instant_fetch(){
+myFunction()
+eval(global_var)
+}
+
+window.addEventListener("load", function(){
+myFunction()
+})
+
+
+    </script>
+</body>
+</html>
